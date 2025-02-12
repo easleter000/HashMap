@@ -1,27 +1,35 @@
-
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
-class GFG {
-    public static void main(String[] args)
-    {
-        String str = "Alice is girl and Bob is boy";
+public class Main {
 
-        Map<String, Integer> hashMap = new HashMap<>();
+    public static void main(String[] args) {
+        Map<String, Integer> map = new HashMap<>();
 
-        String[] words = str.split(" ");
+        Scanner sc = new Scanner(System.in);
 
-        for (String word : words) {
-            Integer integer = hashMap.get(word);
-
-            if (integer == null)
-
-                hashMap.put(word, 1);
-
-            else {
-                hashMap.put(word, integer + 1);
+        while(true){
+            System.out.println("Enter a word, or enter Q to quit:  ");
+            String input = sc.nextLine();
+            if(input.equals("Q")){
+                break;
+            }
+            if (map.containsKey(input)) {
+                int value = map.get(input);
+                value++;
+                map.put(input, value);
+            }else{
+                map.put(input, 1);
             }
         }
-        System.out.println(hashMap);
+
+        int totalWordSum = 0;
+        for (var entry : map.entrySet()) {
+            totalWordSum += entry.getValue();
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+        System.out.println("Total Word Count: " + totalWordSum);
+
     }
 }
